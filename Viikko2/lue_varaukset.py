@@ -43,10 +43,10 @@ def main():
     print("Tuntimäärä:", tuntimaara)
 
     tuntihinta = float(varaus.split('|')[5])
-    print("Tuntihinta:", tuntihinta, "€")
+    print(f"Tuntihinta: {tuntihinta:.2f}".replace(".", ","), "€") #.replace-metodilla voi korvata pisteen pilkulla, huom ei toimi int/float, siksi f-lausemuotoilu.
 
     kokonaishinta = tuntimaara * tuntihinta
-    print("Kokonaishinta:", kokonaishinta, "€")
+    print(f"Kokonaishinta: {kokonaishinta:.2f}".replace(".", ","), "€")
     
     maksettu = varaus.split('|')[6].strip() == "True" #.strip() poistaa merkkijonon alusta ja lopusta välilyönnit ja rivinvaihdot.
     print(f"Maksettu: {'Kyllä' if maksettu else 'Ei'}") 
