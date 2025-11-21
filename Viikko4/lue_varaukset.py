@@ -66,7 +66,7 @@ def main():
         #tietotyypit = [type(x).__name__ for x in varaus]
         # print(" | ".join(tietotyypit))
         # print("------------------------------------------------------------------------")
-        if varaus[8] == True:
+        if varaus[8]:
             print(f"- {varaus[1]}, {varaus[9]}, {varaus[4].day}.{varaus[4].month}.{varaus[4].year} klo {varaus[5].strftime('%H.%M')}")
     print() #tyhjä rivi
 
@@ -78,7 +78,7 @@ def main():
 
     print("3) Varausten vahvistusstatus")
     for varaus in varaukset[1:]:
-        if varaus[8] == True:
+        if varaus[8]:
             print(f"{varaus[1]} → Vahvistettu")
         else:
             print(f"{varaus[1]} → EI vahvistettu")
@@ -88,7 +88,7 @@ def main():
     vahvistetut_varaukset = []
     ei_vahvistetut_varaukset = []
     for varaus in varaukset[1:]:
-        if varaus[8] == True:
+        if varaus[8]:
             vahvistetut_varaukset.append(varaus)
         else:
             ei_vahvistetut_varaukset.append(varaus)
@@ -99,7 +99,7 @@ def main():
     print("5) Vahvistettujen varausten kokonaistulot")
     kokonaistulot = 0
     for varaus in varaukset[1:]:
-        if varaus[8] == True:
+        if varaus[8]:
             kokonaistulot += varaus[7]
     print("Vahvistettujen varausten kokonaistulot: ", f"{kokonaistulot:.2f}".replace(".", ","), "€")
 
