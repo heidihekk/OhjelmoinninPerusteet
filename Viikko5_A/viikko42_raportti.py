@@ -80,6 +80,7 @@ def main() -> None:
     print(f"perjantai\t{suomalainen_pvm(datetime(2025, 10, 17))}\t{paivan_kulutus_ja_tuotanto(datetime(2025, 10, 17), data)}")
     print(f"lauantai\t{suomalainen_pvm(datetime(2025, 10, 18))}\t{paivan_kulutus_ja_tuotanto(datetime(2025, 10, 18), data)}")
     print(f"sunnuntai\t{suomalainen_pvm(datetime(2025, 10, 19))}\t{paivan_kulutus_ja_tuotanto(datetime(2025, 10, 19), data)}")
-
+    print("---------------------------------------------------------------------------")
+    
 if __name__ == "__main__":
     main()
