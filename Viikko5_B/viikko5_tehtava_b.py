@@ -63,7 +63,7 @@ def paivan_kulutus_ja_tuotanto(aika: datetime, data: list) -> str:
 
 def tulostuksen_muotoilu(data: list, aloitus_pvm: datetime, viikkonumero: int) -> str:
     """ Muotoilee viikon datan taulukoksi.
-        Ottaa parametrina viikon datan (list), aloituspäivämäärän (datetime) ja viikkonumeron (int).
+        Ottaa parametrina yhden viikon datan (list), aloituspäivämäärän (datetime) ja viikkonumeron (int).
         Laskee päivämäärät aloituspäivästä eteenpäin 7 päivän ajan.
         Muotoilee päivämäärän suomalaiseen muotoon ja hakee datan funktiolla paivan_kulutus_ja_tuotanto().
         Palauttaa str-muotoisen merkkijonon, jossa viikon data taulukkomuodossa.
@@ -77,7 +77,7 @@ def tulostuksen_muotoilu(data: list, aloitus_pvm: datetime, viikkonumero: int) -
     viikko_x += "---------------------------------------------------------------------------\n"
 
     for i in range(7):
-        paiva = aloitus_pvm + timedelta(days=i) # timedelta lisää tiedoston ensimmäiseen päivämäärään += 1, kunnes käyty läpi koko viikko 7pv
+        paiva = aloitus_pvm + timedelta(days=i) # timedelta lisää tiedoston ensimmäiseen päivämäärään += i päivää, kunnes käyty läpi koko viikko
         viikko_x += f"{paivat[i]}\t{suomalainen_pvm(paiva)}\t{paivan_kulutus_ja_tuotanto(paiva, data)}\n"
    
     viikko_x += "---------------------------------------------------------------------------\n"
@@ -94,7 +94,8 @@ def raportti_tiedostoon(viikko: str) -> None:
 
 def main() -> None:
     """
-
+        Lukee kolmen viikon datan csv-tiedostoista ja tulostaa raportin muotoiltuna yhteenvetotiedostoon
+        kutsumalla funktioita raportti_tiedostoon() ja tulostuksen_muotoilu().
     """
 
     data_vk41 = lue_data("viikko41.csv")
