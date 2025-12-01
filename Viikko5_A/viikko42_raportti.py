@@ -2,8 +2,6 @@
 # License: MIT
 
 from datetime import datetime
-from typing import List, Dict
-
 
 def muunna_tietotyyppi(rivi: list) -> list:
     """Muuttaa tietorivien tietotyypit oikeiksi"""
@@ -22,7 +20,7 @@ def lue_data(tiedoston_nimi: str) -> list:
     """Lukee CSV-tiedoston ja palauttaa rivit sopivassa rakenteessa ja tietotyypeissä."""
     rivit = []
     with open(tiedoston_nimi, "r", encoding="utf-8") as f:
-        eka_rivi = next(f)
+        next(f)
         for rivi in f:
             rivi = rivi.strip()
             rivin_tiedot = rivi.split(";")
@@ -38,7 +36,7 @@ def paivan_kulutus_ja_tuotanto(aika: datetime, data: list) -> str:
     """ Ottaa parametrinä ajan (datetime) ja tiedoston datan (list).
         Laskee annetun päivän yhteiskulutuksen ja -tuotannon jokaista kulutus/tuotantopistettä kohden, 
         ja muuttaa Wh -> kWh.
-        Palauttaa merkkijonon, jossa kulutus- ja tuotantosummat joka pisteelle valmiiksi oikein muotoiltuna
+        Palauttaa merkkijonon, jossa kulutus- ja tuotantosummat joka pisteelle valmiiksi pyöristettynä ja muotoiltuna
     """
     kulutus1 = 0
     kulutus2 = 0
@@ -64,7 +62,10 @@ def paivan_kulutus_ja_tuotanto(aika: datetime, data: list) -> str:
     return f"{kulutus1}\t{kulutus2}\t{kulutus3}\t{tuotanto1}\t{tuotanto2}\t{tuotanto3}"
 
 def main() -> None:
-    """Ohjelman pääfunktio: lukee datan, laskee yhteenvedot ja tulostaa raportin."""
+    """
+    Ohjelman pääfunktio: lukee datan tiedostosta "viikko42.csv", 
+    laskee yhteenvedot joka päivälle ja tulostaa raportin.
+    """
 
     data = lue_data("viikko42.csv")
 
@@ -79,17 +80,6 @@ def main() -> None:
     print(f"perjantai\t{suomalainen_pvm(datetime(2025, 10, 17))}\t{paivan_kulutus_ja_tuotanto(datetime(2025, 10, 17), data)}")
     print(f"lauantai\t{suomalainen_pvm(datetime(2025, 10, 18))}\t{paivan_kulutus_ja_tuotanto(datetime(2025, 10, 18), data)}")
     print(f"sunnuntai\t{suomalainen_pvm(datetime(2025, 10, 19))}\t{paivan_kulutus_ja_tuotanto(datetime(2025, 10, 19), data)}")
-    
-# Viikon 42 sähkönkulutus ja -tuotanto (kWh, vaiheittain)
-
-# Päivä         Pvm         Kulutus [kWh]                 Tuotanto [kWh]
-#              (pv.kk.vvvv)  v1      v2      v3            v1     v2     v3
-# ---------------------------------------------------------------------------
-# maanantai     13.10.2025   12,35   1,56    2,78          0,01   0,39   0,52
-# tiistai       14.10.2025   ...     ...     ...           ...    ...    ...
-# ...
-# sunnuntai     19.10.2025   ...     ...     ...           ...    ...    ...
-
 
 if __name__ == "__main__":
     main()
